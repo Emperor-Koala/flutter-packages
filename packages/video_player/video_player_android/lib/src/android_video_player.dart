@@ -166,6 +166,21 @@ class AndroidVideoPlayer extends VideoPlayerPlatform {
         .setMixWithOthers(MixWithOthersMessage(mixWithOthers: mixWithOthers));
   }
 
+  @override
+  Future<void> setSystemControls(int textureId, SystemControls systemControls) {
+    return _api.setSystemControls(SystemControlsMessage(
+      textureId: textureId,
+      playPause: systemControls.playPause,
+      seek: systemControls.seek,
+      skipForward: systemControls.skipForward,
+      skipBackward: systemControls.skipBackward,
+      skipForwardIntervalMillis:
+          systemControls.skipForwardInterval.inMilliseconds,
+      skipBackwardIntervalMillis:
+          systemControls.skipBackwardInterval.inMilliseconds,
+    ));
+  }
+
   EventChannel _eventChannelFor(int textureId) {
     return EventChannel('flutter.io/videoPlayer/videoEvents$textureId');
   }

@@ -57,6 +57,25 @@ class MixWithOthersMessage {
   bool mixWithOthers;
 }
 
+class SystemControlsMessage {
+  SystemControlsMessage({
+    required this.textureId,
+    required this.playPause,
+    required this.seek,
+    required this.skipForward,
+    required this.skipBackward,
+    required this.skipForwardIntervalMillis,
+    required this.skipBackwardIntervalMillis,
+  });
+  int textureId;
+  bool playPause;
+  bool seek;
+  bool skipForward;
+  bool skipBackward;
+  int skipForwardIntervalMillis;
+  int skipBackwardIntervalMillis;
+}
+
 @HostApi(dartHostTestHandler: 'TestHostVideoPlayerApi')
 abstract class AVFoundationVideoPlayerApi {
   @ObjCSelector('initialize')
@@ -82,4 +101,6 @@ abstract class AVFoundationVideoPlayerApi {
   void pause(TextureMessage msg);
   @ObjCSelector('setMixWithOthers:')
   void setMixWithOthers(MixWithOthersMessage msg);
+  @ObjCSelector('setBackgroundControls:')
+  void setSystemControls(SystemControlsMessage msg);
 }

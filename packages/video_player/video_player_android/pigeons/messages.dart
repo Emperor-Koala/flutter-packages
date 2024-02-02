@@ -56,6 +56,25 @@ class MixWithOthersMessage {
   bool mixWithOthers;
 }
 
+class SystemControlsMessage {
+  SystemControlsMessage({
+    required this.textureId,
+    required this.playPause,
+    required this.seek,
+    required this.skipForward,
+    required this.skipBackward,
+    required this.skipForwardIntervalMillis,
+    required this.skipBackwardIntervalMillis,
+  });
+  int textureId;
+  bool playPause;
+  bool seek;
+  bool skipForward;
+  bool skipBackward;
+  int skipForwardIntervalMillis;
+  int skipBackwardIntervalMillis;
+}
+
 @HostApi(dartHostTestHandler: 'TestHostVideoPlayerApi')
 abstract class AndroidVideoPlayerApi {
   void initialize();
@@ -69,4 +88,5 @@ abstract class AndroidVideoPlayerApi {
   void seekTo(PositionMessage msg);
   void pause(TextureMessage msg);
   void setMixWithOthers(MixWithOthersMessage msg);
+  void setSystemControls(SystemControlsMessage msg);
 }

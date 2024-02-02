@@ -107,6 +107,11 @@ abstract class VideoPlayerPlatform extends PlatformInterface {
   Future<void> setWebOptions(int textureId, VideoPlayerWebOptions options) {
     throw UnimplementedError('setWebOptions() has not been implemented.');
   }
+
+  /// Sets the background controls on mobile platforms
+  Future<void> setSystemControls(int textureId, SystemControls systemControls) {
+    throw UnimplementedError('setSystemControls() has not been implemented.');
+  }
 }
 
 class _PlaceholderImplementation extends VideoPlayerPlatform {}
@@ -473,4 +478,35 @@ class VideoPlayerWebOptionsControls {
 
     return controlsList.join(' ');
   }
+}
+
+/// [SystemControls] can be used to set which controls are available in the background
+class SystemControls {
+  /// Sets which controls are available in the background
+  const SystemControls({
+    this.playPause = true,
+    this.seek = true,
+    this.skipBackward = true,
+    this.skipForward = true,
+    this.skipBackwardInterval = const Duration(seconds: 10),
+    this.skipForwardInterval = const Duration(seconds: 10),
+  });
+
+  /// Whether the play/pause control is available
+  final bool playPause;
+
+  /// Whether the seek control is available
+  final bool seek;
+
+  /// Whether the skip backward control is available
+  final bool skipBackward;
+
+  /// Whether the skip forward control is available
+  final bool skipForward;
+
+  /// The interval to skip backward
+  final Duration skipBackwardInterval;
+
+  /// The interval to skip forward
+  final Duration skipForwardInterval;
 }

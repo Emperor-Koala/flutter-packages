@@ -54,3 +54,7 @@ gradlew.bat
 .project
 .classpath
 .settings
+
+#FVM
+.fvm
+.vscode/settings.json
