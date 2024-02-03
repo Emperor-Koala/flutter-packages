@@ -41,6 +41,9 @@ class _TestHostVideoPlayerApiCodec extends StandardMessageCodec {
     } else if (value is VolumeMessage) {
       buffer.putUint8(135);
       writeValue(buffer, value.encode());
+    } else if (value is dynamic) {
+      buffer.putUint8(136);
+      writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
     }
@@ -65,6 +68,8 @@ class _TestHostVideoPlayerApiCodec extends StandardMessageCodec {
         return TextureMessage.decode(readValue(buffer)!);
       case 135: 
         return VolumeMessage.decode(readValue(buffer)!);
+      case 136: 
+        return dynamic.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
     }

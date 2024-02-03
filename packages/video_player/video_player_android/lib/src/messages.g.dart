@@ -201,37 +201,17 @@ class MixWithOthersMessage {
 class SystemControlsMessage {
   SystemControlsMessage({
     required this.textureId,
-    required this.playPause,
-    required this.seek,
-    required this.skipForward,
-    required this.skipBackward,
-    required this.skipForwardIntervalMillis,
-    required this.skipBackwardIntervalMillis,
+    required this.controls,
   });
 
   int textureId;
 
-  bool playPause;
-
-  bool seek;
-
-  bool skipForward;
-
-  bool skipBackward;
-
-  int skipForwardIntervalMillis;
-
-  int skipBackwardIntervalMillis;
+  Map<String?, dynamic?> controls;
 
   Object encode() {
     return <Object?>[
       textureId,
-      playPause,
-      seek,
-      skipForward,
-      skipBackward,
-      skipForwardIntervalMillis,
-      skipBackwardIntervalMillis,
+      controls,
     ];
   }
 
@@ -239,12 +219,7 @@ class SystemControlsMessage {
     result as List<Object?>;
     return SystemControlsMessage(
       textureId: result[0]! as int,
-      playPause: result[1]! as bool,
-      seek: result[2]! as bool,
-      skipForward: result[3]! as bool,
-      skipBackward: result[4]! as bool,
-      skipForwardIntervalMillis: result[5]! as int,
-      skipBackwardIntervalMillis: result[6]! as int,
+      controls: (result[1] as Map<Object?, Object?>?)!.cast<String?, dynamic?>(),
     );
   }
 }
@@ -277,6 +252,9 @@ class _AndroidVideoPlayerApiCodec extends StandardMessageCodec {
     } else if (value is VolumeMessage) {
       buffer.putUint8(135);
       writeValue(buffer, value.encode());
+    } else if (value is dynamic) {
+      buffer.putUint8(136);
+      writeValue(buffer, value.encode());
     } else {
       super.writeValue(buffer, value);
     }
@@ -301,6 +279,8 @@ class _AndroidVideoPlayerApiCodec extends StandardMessageCodec {
         return TextureMessage.decode(readValue(buffer)!);
       case 135: 
         return VolumeMessage.decode(readValue(buffer)!);
+      case 136: 
+        return dynamic.decode(readValue(buffer)!);
       default:
         return super.readValueOfType(type, buffer);
     }

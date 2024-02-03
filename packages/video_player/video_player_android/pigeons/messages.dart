@@ -59,20 +59,10 @@ class MixWithOthersMessage {
 class SystemControlsMessage {
   SystemControlsMessage({
     required this.textureId,
-    required this.playPause,
-    required this.seek,
-    required this.skipForward,
-    required this.skipBackward,
-    required this.skipForwardIntervalMillis,
-    required this.skipBackwardIntervalMillis,
+    required this.controls,
   });
   int textureId;
-  bool playPause;
-  bool seek;
-  bool skipForward;
-  bool skipBackward;
-  int skipForwardIntervalMillis;
-  int skipBackwardIntervalMillis;
+  Map<String?, dynamic?> controls;
 }
 
 @HostApi(dartHostTestHandler: 'TestHostVideoPlayerApi')

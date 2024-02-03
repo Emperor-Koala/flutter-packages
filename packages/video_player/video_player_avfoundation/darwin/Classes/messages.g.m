@@ -259,31 +259,16 @@ static id GetNullableObjectAtIndex(NSArray *array, NSInteger key) {
 
 @implementation FVPSystemControlsMessage
 + (instancetype)makeWithTextureId:(NSInteger )textureId
-    playPause:(BOOL )playPause
-    seek:(BOOL )seek
-    skipForward:(BOOL )skipForward
-    skipBackward:(BOOL )skipBackward
-    skipForwardIntervalMillis:(NSInteger )skipForwardIntervalMillis
-    skipBackwardIntervalMillis:(NSInteger )skipBackwardIntervalMillis {
+    controls:(NSDictionary<NSString *, FVPdynamic *> *)controls {
   FVPSystemControlsMessage* pigeonResult = [[FVPSystemControlsMessage alloc] init];
   pigeonResult.textureId = textureId;
-  pigeonResult.playPause = playPause;
-  pigeonResult.seek = seek;
-  pigeonResult.skipForward = skipForward;
-  pigeonResult.skipBackward = skipBackward;
-  pigeonResult.skipForwardIntervalMillis = skipForwardIntervalMillis;
-  pigeonResult.skipBackwardIntervalMillis = skipBackwardIntervalMillis;
+  pigeonResult.controls = controls;
   return pigeonResult;
 }
 + (FVPSystemControlsMessage *)fromList:(NSArray *)list {
   FVPSystemControlsMessage *pigeonResult = [[FVPSystemControlsMessage alloc] init];
   pigeonResult.textureId = [GetNullableObjectAtIndex(list, 0) integerValue];
-  pigeonResult.playPause = [GetNullableObjectAtIndex(list, 1) boolValue];
-  pigeonResult.seek = [GetNullableObjectAtIndex(list, 2) boolValue];
-  pigeonResult.skipForward = [GetNullableObjectAtIndex(list, 3) boolValue];
-  pigeonResult.skipBackward = [GetNullableObjectAtIndex(list, 4) boolValue];
-  pigeonResult.skipForwardIntervalMillis = [GetNullableObjectAtIndex(list, 5) integerValue];
-  pigeonResult.skipBackwardIntervalMillis = [GetNullableObjectAtIndex(list, 6) integerValue];
+  pigeonResult.controls = GetNullableObjectAtIndex(list, 1);
   return pigeonResult;
 }
 + (nullable FVPSystemControlsMessage *)nullableFromList:(NSArray *)list {
@@ -292,12 +277,7 @@ static id GetNullableObjectAtIndex(NSArray *array, NSInteger key) {
 - (NSArray *)toList {
   return @[
     @(self.textureId),
-    @(self.playPause),
-    @(self.seek),
-    @(self.skipForward),
-    @(self.skipBackward),
-    @(self.skipForwardIntervalMillis),
-    @(self.skipBackwardIntervalMillis),
+    self.controls ?: [NSNull null],
   ];
 }
 @end
@@ -323,6 +303,8 @@ static id GetNullableObjectAtIndex(NSArray *array, NSInteger key) {
       return [FVPTextureMessage fromList:[self readValue]];
     case 135: 
       return [FVPVolumeMessage fromList:[self readValue]];
+    case 136: 
+      return [FVPdynamic fromList:[self readValue]];
     default:
       return [super readValueOfType:type];
   }
@@ -356,6 +338,9 @@ static id GetNullableObjectAtIndex(NSArray *array, NSInteger key) {
     [self writeValue:[value toList]];
   } else if ([value isKindOfClass:[FVPVolumeMessage class]]) {
     [self writeByte:135];
+    [self writeValue:[value toList]];
+  } else if ([value isKindOfClass:[FVPdynamic class]]) {
+    [self writeByte:136];
     [self writeValue:[value toList]];
   } else {
     [super writeValue:value];

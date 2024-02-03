@@ -91,19 +91,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// `init` unavailable to enforce nonnull fields, see the `make` class method.
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)makeWithTextureId:(NSInteger )textureId
-    playPause:(BOOL )playPause
-    seek:(BOOL )seek
-    skipForward:(BOOL )skipForward
-    skipBackward:(BOOL )skipBackward
-    skipForwardIntervalMillis:(NSInteger )skipForwardIntervalMillis
-    skipBackwardIntervalMillis:(NSInteger )skipBackwardIntervalMillis;
+    controls:(NSDictionary<NSString *, FVPdynamic *> *)controls;
 @property(nonatomic, assign) NSInteger  textureId;
-@property(nonatomic, assign) BOOL  playPause;
-@property(nonatomic, assign) BOOL  seek;
-@property(nonatomic, assign) BOOL  skipForward;
-@property(nonatomic, assign) BOOL  skipBackward;
-@property(nonatomic, assign) NSInteger  skipForwardIntervalMillis;
-@property(nonatomic, assign) NSInteger  skipBackwardIntervalMillis;
+@property(nonatomic, copy) NSDictionary<NSString *, FVPdynamic *> * controls;
 @end
 
 /// The codec used by FVPAVFoundationVideoPlayerApi.

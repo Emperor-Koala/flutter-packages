@@ -598,82 +598,17 @@ public class Messages {
       this.textureId = setterArg;
     }
 
-    private @NonNull Boolean playPause;
+    private @NonNull Map<String, dynamic> controls;
 
-    public @NonNull Boolean getPlayPause() {
-      return playPause;
+    public @NonNull Map<String, dynamic> getControls() {
+      return controls;
     }
 
-    public void setPlayPause(@NonNull Boolean setterArg) {
+    public void setControls(@NonNull Map<String, dynamic> setterArg) {
       if (setterArg == null) {
-        throw new IllegalStateException("Nonnull field \"playPause\" is null.");
+        throw new IllegalStateException("Nonnull field \"controls\" is null.");
       }
-      this.playPause = setterArg;
-    }
-
-    private @NonNull Boolean seek;
-
-    public @NonNull Boolean getSeek() {
-      return seek;
-    }
-
-    public void setSeek(@NonNull Boolean setterArg) {
-      if (setterArg == null) {
-        throw new IllegalStateException("Nonnull field \"seek\" is null.");
-      }
-      this.seek = setterArg;
-    }
-
-    private @NonNull Boolean skipForward;
-
-    public @NonNull Boolean getSkipForward() {
-      return skipForward;
-    }
-
-    public void setSkipForward(@NonNull Boolean setterArg) {
-      if (setterArg == null) {
-        throw new IllegalStateException("Nonnull field \"skipForward\" is null.");
-      }
-      this.skipForward = setterArg;
-    }
-
-    private @NonNull Boolean skipBackward;
-
-    public @NonNull Boolean getSkipBackward() {
-      return skipBackward;
-    }
-
-    public void setSkipBackward(@NonNull Boolean setterArg) {
-      if (setterArg == null) {
-        throw new IllegalStateException("Nonnull field \"skipBackward\" is null.");
-      }
-      this.skipBackward = setterArg;
-    }
-
-    private @NonNull Long skipForwardIntervalMillis;
-
-    public @NonNull Long getSkipForwardIntervalMillis() {
-      return skipForwardIntervalMillis;
-    }
-
-    public void setSkipForwardIntervalMillis(@NonNull Long setterArg) {
-      if (setterArg == null) {
-        throw new IllegalStateException("Nonnull field \"skipForwardIntervalMillis\" is null.");
-      }
-      this.skipForwardIntervalMillis = setterArg;
-    }
-
-    private @NonNull Long skipBackwardIntervalMillis;
-
-    public @NonNull Long getSkipBackwardIntervalMillis() {
-      return skipBackwardIntervalMillis;
-    }
-
-    public void setSkipBackwardIntervalMillis(@NonNull Long setterArg) {
-      if (setterArg == null) {
-        throw new IllegalStateException("Nonnull field \"skipBackwardIntervalMillis\" is null.");
-      }
-      this.skipBackwardIntervalMillis = setterArg;
+      this.controls = setterArg;
     }
 
     /** Constructor is non-public to enforce null safety; use Builder. */
@@ -688,71 +623,26 @@ public class Messages {
         return this;
       }
 
-      private @Nullable Boolean playPause;
+      private @Nullable Map<String, dynamic> controls;
 
-      public @NonNull Builder setPlayPause(@NonNull Boolean setterArg) {
-        this.playPause = setterArg;
-        return this;
-      }
-
-      private @Nullable Boolean seek;
-
-      public @NonNull Builder setSeek(@NonNull Boolean setterArg) {
-        this.seek = setterArg;
-        return this;
-      }
-
-      private @Nullable Boolean skipForward;
-
-      public @NonNull Builder setSkipForward(@NonNull Boolean setterArg) {
-        this.skipForward = setterArg;
-        return this;
-      }
-
-      private @Nullable Boolean skipBackward;
-
-      public @NonNull Builder setSkipBackward(@NonNull Boolean setterArg) {
-        this.skipBackward = setterArg;
-        return this;
-      }
-
-      private @Nullable Long skipForwardIntervalMillis;
-
-      public @NonNull Builder setSkipForwardIntervalMillis(@NonNull Long setterArg) {
-        this.skipForwardIntervalMillis = setterArg;
-        return this;
-      }
-
-      private @Nullable Long skipBackwardIntervalMillis;
-
-      public @NonNull Builder setSkipBackwardIntervalMillis(@NonNull Long setterArg) {
-        this.skipBackwardIntervalMillis = setterArg;
+      public @NonNull Builder setControls(@NonNull Map<String, dynamic> setterArg) {
+        this.controls = setterArg;
         return this;
       }
 
       public @NonNull SystemControlsMessage build() {
         SystemControlsMessage pigeonReturn = new SystemControlsMessage();
         pigeonReturn.setTextureId(textureId);
-        pigeonReturn.setPlayPause(playPause);
-        pigeonReturn.setSeek(seek);
-        pigeonReturn.setSkipForward(skipForward);
-        pigeonReturn.setSkipBackward(skipBackward);
-        pigeonReturn.setSkipForwardIntervalMillis(skipForwardIntervalMillis);
-        pigeonReturn.setSkipBackwardIntervalMillis(skipBackwardIntervalMillis);
+        pigeonReturn.setControls(controls);
         return pigeonReturn;
       }
     }
 
     @NonNull
     ArrayList<Object> toList() {
-      ArrayList<Object> toListResult = new ArrayList<Object>(7);
+      ArrayList<Object> toListResult = new ArrayList<Object>(2);
       toListResult.add(textureId);
-      toListResult.add(playPause);
-      toListResult.add(seek);
-      toListResult.add(skipForward);
-      toListResult.add(skipBackward);
-      toListResult.add(skipForwardIntervalMillis);
-      toListResult.add(skipBackwardIntervalMillis);
+      toListResult.add(controls);
       return toListResult;
     }
 
@@ -760,18 +650,8 @@ public class Messages {
       SystemControlsMessage pigeonResult = new SystemControlsMessage();
       Object textureId = list.get(0);
       pigeonResult.setTextureId((textureId == null) ? null : ((textureId instanceof Integer) ? (Integer) textureId : (Long) textureId));
-      Object playPause = list.get(1);
-      pigeonResult.setPlayPause((Boolean) playPause);
-      Object seek = list.get(2);
-      pigeonResult.setSeek((Boolean) seek);
-      Object skipForward = list.get(3);
-      pigeonResult.setSkipForward((Boolean) skipForward);
-      Object skipBackward = list.get(4);
-      pigeonResult.setSkipBackward((Boolean) skipBackward);
-      Object skipForwardIntervalMillis = list.get(5);
-      pigeonResult.setSkipForwardIntervalMillis((skipForwardIntervalMillis == null) ? null : ((skipForwardIntervalMillis instanceof Integer) ? (Integer) skipForwardIntervalMillis : (Long) skipForwardIntervalMillis));
-      Object skipBackwardIntervalMillis = list.get(6);
-      pigeonResult.setSkipBackwardIntervalMillis((skipBackwardIntervalMillis == null) ? null : ((skipBackwardIntervalMillis instanceof Integer) ? (Integer) skipBackwardIntervalMillis : (Long) skipBackwardIntervalMillis));
+      Object controls = list.get(1);
+      pigeonResult.setControls((Map<String, dynamic>) controls);
       return pigeonResult;
     }
   }
@@ -800,6 +680,8 @@ public class Messages {
           return TextureMessage.fromList((ArrayList<Object>) readValue(buffer));
         case (byte) 135:
           return VolumeMessage.fromList((ArrayList<Object>) readValue(buffer));
+        case (byte) 136:
+          return dynamic.fromList((ArrayList<Object>) readValue(buffer));
         default:
           return super.readValueOfType(type, buffer);
       }
@@ -831,6 +713,9 @@ public class Messages {
       } else if (value instanceof VolumeMessage) {
         stream.write(135);
         writeValue(stream, ((VolumeMessage) value).toList());
+      } else if (value instanceof dynamic) {
+        stream.write(136);
+        writeValue(stream, ((dynamic) value).toList());
       } else {
         super.writeValue(stream, value);
       }

@@ -62,6 +62,8 @@ final class VideoPlayer {
 
   private final VideoPlayerOptions options;
 
+  private VideoPlayerSystemControls systemControls;
+
   private DefaultHttpDataSource.Factory httpDataSourceFactory = new DefaultHttpDataSource.Factory();
 
   VideoPlayer(
@@ -290,6 +292,12 @@ final class VideoPlayer {
 
   long getPosition() {
     return exoPlayer.getCurrentPosition();
+  }
+
+  void setSystemControls(VideoPlayerSystemControls controls) {
+    this.systemControls = controls;
+    // TODO implement
+    
   }
 
   @SuppressWarnings("SuspiciousNameCombination")

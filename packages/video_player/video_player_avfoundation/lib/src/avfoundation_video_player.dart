@@ -168,14 +168,7 @@ class AVFoundationVideoPlayer extends VideoPlayerPlatform {
   Future<void> setSystemControls(int textureId, SystemControls systemControls) {
     return _api.setSystemControls(SystemControlsMessage(
       textureId: textureId,
-      playPause: systemControls.playPause,
-      seek: systemControls.seek,
-      skipForward: systemControls.skipForward,
-      skipBackward: systemControls.skipBackward,
-      skipForwardIntervalMillis:
-          systemControls.skipForwardInterval.inMilliseconds,
-      skipBackwardIntervalMillis:
-          systemControls.skipBackwardInterval.inMilliseconds,
+      controls: systemControls.toMap(),
     ));
   }
 

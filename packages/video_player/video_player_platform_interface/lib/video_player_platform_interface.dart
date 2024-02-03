@@ -484,6 +484,7 @@ class VideoPlayerWebOptionsControls {
 class SystemControls {
   /// Sets which controls are available in the background
   const SystemControls({
+    this.enabled = true,
     this.playPause = true,
     this.seek = true,
     this.skipBackward = true,
@@ -491,6 +492,9 @@ class SystemControls {
     this.skipBackwardInterval = const Duration(seconds: 10),
     this.skipForwardInterval = const Duration(seconds: 10),
   });
+
+  /// Whether the system controls are enabled
+  final bool enabled;
 
   /// Whether the play/pause control is available
   final bool playPause;
@@ -509,4 +513,17 @@ class SystemControls {
 
   /// The interval to skip forward
   final Duration skipForwardInterval;
+
+  /// Converts the [SystemControls] to a map
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'enabled': enabled,
+      'playPause': playPause,
+      'seek': seek,
+      'skipBackward': skipBackward,
+      'skipForward': skipForward,
+      'skipBackwardIntervalMillis': skipBackwardInterval.inMilliseconds,
+      'skipForwardIntervalMillis': skipForwardInterval.inMilliseconds,
+    };
+  }
 }
